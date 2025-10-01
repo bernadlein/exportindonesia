@@ -1,0 +1,20 @@
+[
+  {
+    "id": "p1",
+    "title": "Cinnamon (HS 0906)",
+    "desc": "2\u00d720' containers to Jebel Ali, UAE \u2013 Incoterms FOB.",
+    "img": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop"
+  },
+  {
+    "id": "p2",
+    "title": "Green Coffee Beans (HS 0901)",
+    "desc": "1\u00d740' container to Hamburg, Germany \u2013 Incoterms CFR.",
+    "img": "https://images.unsplash.com/photo-1546549039-49e9b1f1b0d9?q=80&w=1600&auto=format&fit=crop"
+  },
+  {
+    "id": "p3",
+    "title": "Coconut Charcoal (HS 4402)",
+    "desc": "Monthly shipments to Jeddah, KSA \u2013 Incoterms CIF.",
+    "img": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=1600&auto=format&fit=crop"
+  }
+]

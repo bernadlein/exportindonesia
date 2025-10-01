@@ -1,0 +1,29 @@
+{
+  "name": "piter-ritiauw-exports-starter",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@8.15.5",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "preinstall": "npx -y only-allow pnpm || echo 'Use pnpm'",
+    "dev": "nuxt dev --port 3000",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^3.12.0",
+    "@nuxtjs/tailwindcss": "^6.10.3",
+    "@nuxtjs/i18n": "^8.3.2",
+    "@pinia/nuxt": "^0.5.1",
+    "pinia": "^2.1.7"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.7",
+    "postcss": "^8.4.41",
+    "autoprefixer": "^10.4.19",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,1 @@
+<script setup lang='ts'>defineProps<{ title:string; sub?:string }>()</script><template><div><h3 class='section-title'>{{title}}</h3><p v-if='sub' class='section-sub'>{{sub}}</p></div></template>

@@ -1,0 +1,1 @@
+<script setup lang='ts'>defineProps<{icon:string;title:string;desc:string}>()</script><template><div class='card p-5'><div class='mb-2 text-xl'>{{icon}}</div><h4 class='font-semibold'>{{title}}</h4><p class='mt-1 text-sm text-slate-600'>{{desc}}</p></div></template>

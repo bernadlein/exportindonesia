@@ -1,0 +1,5 @@
+{
+  "installCommand": "pnpm i",
+  "startCommand": "pnpm dev",
+  "timeout": 120000
+}

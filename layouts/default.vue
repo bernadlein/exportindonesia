@@ -1,0 +1,1 @@
+<template><div><NavBar/><main><slot/></main><SiteFooter/></div></template>

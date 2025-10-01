@@ -1,0 +1,1 @@
+<script setup lang='ts'>const { t } = useI18n()</script><template><section class='section'><SectionHeading :title="t('cert.title')" :sub="t('cert.sub')"/><div class='mt-6'><CertificateGrid/></div></section></template>

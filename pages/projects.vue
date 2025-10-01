@@ -1,0 +1,1 @@
+<script setup lang='ts'>const { t } = useI18n(); const { data: projects } = await useFetch('/api/projects')</script><template><section class='section'><SectionHeading :title="t('proj.title')" :sub="t('proj.sub')"/><div class='mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6'><ProjectCard v-for='p in projects' :key='p.id' :item='p'/></div></section></template>

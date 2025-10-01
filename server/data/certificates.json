@@ -1,0 +1,32 @@
+[
+  {
+    "id": "iso",
+    "title": "ISO 9001",
+    "img": "https://placehold.co/300x180?text=ISO+9001"
+  },
+  {
+    "id": "halal",
+    "title": "Halal",
+    "img": "https://placehold.co/300x180?text=Halal"
+  },
+  {
+    "id": "coa",
+    "title": "COA",
+    "img": "https://placehold.co/300x180?text=COA"
+  },
+  {
+    "id": "fumig",
+    "title": "Fumigation",
+    "img": "https://placehold.co/300x180?text=Fumigation"
+  },
+  {
+    "id": "phyto",
+    "title": "Phytosanitary",
+    "img": "https://placehold.co/300x180?text=Phytosanitary"
+  },
+  {
+    "id": "sni",
+    "title": "SNI",
+    "img": "https://placehold.co/300x180?text=SNI"
+  }
+]
