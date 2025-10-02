@@ -1,5 +1,6 @@
 <!-- components/ProductCard.vue -->
 <script setup lang="ts">
+import { openRfq } from '@/composables/useRfq'
 const props = defineProps<{ p: any; price: string }>()
 </script>
 
