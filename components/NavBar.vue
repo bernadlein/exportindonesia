@@ -1,12 +1,17 @@
+<!-- components/NavBar.vue -->
 <script setup lang="ts">
 import { setLocale } from '#i18n'
 
-const { t, locale } = useI18n()        // locale adalah Ref
+const { t, locale } = useI18n()
 const config = useRuntimeConfig()
 const currency = useCurrency()
 
-// untuk kelas aktif
+// locale aktif (untuk kelas tombol)
 const currentLocale = computed(() => String(locale.value))
+
+// helper supaya aman (hindari assign ref langsung di template)
+const setCurrency = (c: 'IDR' | 'USD') => { currency.value = c }
+const setLang = (l: 'id' | 'en') => { setLocale(l) }
 
 // Mega menu (CSS-only + click lock)
 const openMega = ref(false)
@@ -34,8 +39,13 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
       <!-- Desktop nav (CSS-only hover) -->
       <nav class="hidden lg:flex items-center gap-6 text-sm">
         <div ref="wrapper" class="relative group">
-          <button type="button" class="inline-flex items-center gap-2 hover:text-brand-600 focus:outline-none"
-                  :aria-expanded="openMega" @click.stop="openMega = !openMega">
+          <!-- Trigger -->
+          <button
+            type="button"
+            class="inline-flex items-center gap-2 hover:text-brand-600 focus:outline-none"
+            :aria-expanded="openMega"
+            @click.stop="openMega = !openMega"
+          >
             Products
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180"
                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,10 +53,10 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
             </svg>
           </button>
 
-          <!-- bridge -->
+          <!-- Hover bridge (mencegah gap) -->
           <div class="absolute left-0 top-full h-3 w-[680px] z-[55] pointer-events-none group-hover:pointer-events-auto" />
 
-          <!-- panel -->
+          <!-- Panel -->
           <div
             class="absolute left-0 top-full w-[680px] rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl z-[60]
                    dark:border-slate-700 dark:bg-slate-800
@@ -55,10 +65,22 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
             :class="openMega ? 'visible opacity-100 translate-y-0 pointer-events-auto' : ''"
           >
             <div class="grid grid-cols-2 gap-4">
-              <NuxtLink to="/catalog?category=spices"   class="card p-4 hover:shadow cursor-pointer"><h4 class="font-semibold">Spices</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse spices</p></NuxtLink>
-              <NuxtLink to="/catalog?category=coffee"   class="card p-4 hover:shadow cursor-pointer"><h4 class="font-semibold">Coffee</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse coffee</p></NuxtLink>
-              <NuxtLink to="/catalog?category=charcoal" class="card p-4 hover:shadow cursor-pointer"><h4 class="font-semibold">Charcoal</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse charcoal</p></NuxtLink>
-              <NuxtLink to="/catalog?category=umkm"     class="card p-4 hover:shadow cursor-pointer"><h4 class="font-semibold">UMKM</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse UMKM</p></NuxtLink>
+              <NuxtLink to="/catalog?category=spices"   class="card p-4 hover:shadow cursor-pointer">
+                <h4 class="font-semibold">Spices</h4>
+                <p class="text-xs text-slate-600 dark:text-slate-300">Browse spices</p>
+              </NuxtLink>
+              <NuxtLink to="/catalog?category=coffee"   class="card p-4 hover:shadow cursor-pointer">
+                <h4 class="font-semibold">Coffee</h4>
+                <p class="text-xs text-slate-600 dark:text-slate-300">Browse coffee</p>
+              </NuxtLink>
+              <NuxtLink to="/catalog?category=charcoal" class="card p-4 hover:shadow cursor-pointer">
+                <h4 class="font-semibold">Charcoal</h4>
+                <p class="text-xs text-slate-600 dark:text-slate-300">Browse charcoal</p>
+              </NuxtLink>
+              <NuxtLink to="/catalog?category=umkm"     class="card p-4 hover:shadow cursor-pointer">
+                <h4 class="font-semibold">UMKM</h4>
+                <p class="text-xs text-slate-600 dark:text-slate-300">Browse UMKM</p>
+              </NuxtLink>
             </div>
             <div class="mt-4 flex items-center justify-between">
               <NuxtLink to="/catalog" class="btn-outline text-sm">View All Products</NuxtLink>
@@ -79,21 +101,21 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
         <!-- Currency -->
         <div class="hidden md:flex items-center gap-1 rounded-xl border border-slate-200 p-1 dark:border-slate-700">
           <button class="px-2 py-1 text-xs rounded-lg"
-                  :class="{'bg-slate-900 text-white': currency==='IDR'}"
-                  @click="currency='IDR'">IDR</button>
+                  :class="{'bg-slate-900 text-white': currency.value==='IDR'}"
+                  @click="setCurrency('IDR')">IDR</button>
           <button class="px-2 py-1 text-xs rounded-lg"
-                  :class="{'bg-slate-900 text-white': currency==='USD'}"
-                  @click="currency='USD'">USD</button>
+                  :class="{'bg-slate-900 text-white': currency.value==='USD'}"
+                  @click="setCurrency('USD')">USD</button>
         </div>
 
         <!-- Locale -->
         <div class="flex items-center gap-1 rounded-xl border border-slate-200 p-1 dark:border-slate-700">
           <button class="px-2 py-1 text-xs rounded-lg"
                   :class="{'bg-slate-900 text-white': currentLocale==='id'}"
-                  @click="setLocale('id')">ID</button>
+                  @click="setLang('id')">ID</button>
           <button class="px-2 py-1 text-xs rounded-lg"
                   :class="{'bg-slate-900 text-white': currentLocale==='en'}"
-                  @click="setLocale('en')">EN</button>
+                  @click="setLang('en')">EN</button>
         </div>
 
         <!-- Theme toggle -->
