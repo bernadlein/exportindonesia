@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ variant?: 'primary'|'outline'|'ghost'; as?: string }>()
+defineProps<{ variant?: 'primary'|'outline'|'accent'|'ghost' }>()
 const tag = computed(() => (useAttrs().to ? 'NuxtLink' : (useAttrs().href ? 'a' : 'button')))
 </script>
 
@@ -7,7 +7,8 @@ const tag = computed(() => (useAttrs().to ? 'NuxtLink' : (useAttrs().href ? 'a' 
   <component :is="tag" v-bind="$attrs"
     :class="[
       variant==='outline' ? 'btn-outline' :
-      variant==='ghost' ? 'btn' :
+      variant==='accent'  ? 'btn-accent'  :
+      variant==='ghost'   ? 'btn'         :
       'btn-primary'
     ]">
     <slot />
