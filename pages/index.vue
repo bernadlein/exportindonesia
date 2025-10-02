@@ -12,4 +12,8 @@
       <ui-card><h4 class="font-semibold mb-1">Leads Tracked</h4><p class="text-sm text-slate-600">Semua RFQ tercatat & bisa diekspor.</p></ui-card>
     </div>
   </section>
+
+  <CTAWide/>
+
+  <Testimonials/>
 </template>
