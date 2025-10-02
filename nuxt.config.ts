@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   // Hilangkan warning compatibilityDate dari Nitro
   nitro: { compatibilityDate: '2025-10-02' },
 
-  // Pindahkan PostCSS ke sini (hapus file postcss.config.js kalau masih ada)
+  // PostCSS di sini (hapus file postcss.config.js jika masih ada)
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -16,39 +16,37 @@ export default defineNuxtConfig({
     }
   },
 
-  // ⛔️ JANGAN override vite.optimizeDeps (hapus konfigurasi sebelumnya)
-
+  // JANGAN override vite.optimizeDeps
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@pinia/nuxt'],
   css: ['@/assets/css/tailwind.css'],
-  
-app: {
-  head: {
-    title: 'Piter Ritiauw Exports – International Export Company',
-    meta: [
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'description', content: 'Professional international export website with product catalog, RFQ and compliance.' },
-      { name: 'theme-color', content: '#166534' },
 
-      // Open Graph
-      { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: 'Piter Ritiauw Exports' },
-      { property: 'og:description', content: 'Exporting Indonesia’s best agricultural & UMKM products.' },
-      { property: 'og:image', content: '/og-cover.jpg' },
-      { property: 'og:url', content: 'https://example.com' },
+  app: {
+    head: {
+      title: 'Piter Ritiauw Exports – International Export Company',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Professional international export website with product catalog, RFQ and compliance.' },
+        { name: 'theme-color', content: '#166534' },
 
-      // Twitter
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Piter Ritiauw Exports' },
-      { name: 'twitter:description', content: 'Exporting Indonesia’s best agricultural & UMKM products.' },
-      { name: 'twitter:image', content: '/og-cover.jpg' }
-    ],
-    link: [
-      { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
-      { rel: 'canonical', href: 'https://example.com' }
-    ]
-  }
-}
+        // Open Graph
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: 'Piter Ritiauw Exports' },
+        { property: 'og:description', content: 'Exporting Indonesia’s best agricultural & UMKM products.' },
+        { property: 'og:image', content: '/og-cover.jpg' },
+        { property: 'og:url', content: 'https://example.com' },
 
+        // Twitter
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Piter Ritiauw Exports' },
+        { name: 'twitter:description', content: 'Exporting Indonesia’s best agricultural & UMKM products.' },
+        { name: 'twitter:image', content: '/og-cover.jpg' }
+      ],
+      link: [
+        { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+        { rel: 'canonical', href: 'https://example.com' }
+      ]
+    }
+  }, // ⬅️ penting: tutup `app` dan beri koma
 
   runtimeConfig: {
     public: {
