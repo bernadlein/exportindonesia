@@ -13,6 +13,7 @@ const props = defineProps<{ p: any; price: string }>()
       <img
         :src="p.img"
         :alt="p.name"
+        loading="lazy"
         class="h-48 w-full object-cover transition-transform duration-500 ease-out transform-gpu will-change-transform group-hover:scale-105"
       />
       <!-- Overlay gradient muncul saat hover -->
