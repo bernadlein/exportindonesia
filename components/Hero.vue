@@ -23,6 +23,7 @@ const { t } = useI18n()
       <div class="relative">
         <img class="h-full w-full rounded-3xl object-cover shadow-lift"
              src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1600&auto=format&fit=crop"
+             loading="lazy"
              alt="Agriculture fields">
         <div class="absolute -bottom-5 -left-5 hidden md:block rounded-2xl border border-slate-200 bg-white p-4 shadow-soft">
           <p class="text-xs text-slate-500">Demo only – placeholder image</p>
