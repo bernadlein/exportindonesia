@@ -1,8 +1,6 @@
-
 <script setup lang="ts">
-const { t } = useI18n()
 const currency = useCurrency()
-const { data: products } = await useFetch('/api/products')
+const { data: products, pending } = await useFetch('/api/products')
 const query = ref('')
 const category = ref('all')
 
@@ -22,7 +20,10 @@ const filtered = computed(() => (products.value || []).filter((p:any) => {
 <template>
   <section class="section">
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
-      <SectionHeading :title="t('catalog.title')" :sub="t('catalog.sub')" />
+      <div>
+        <h1 class="section-title">Product Catalog</h1>
+        <p class="section-sub">Items with HS code, MOQ & price-range.</p>
+      </div>
       <div class="flex flex-wrap items-center gap-2">
         <select v-model="category" class="rounded-xl border border-slate-300 px-3 py-2 text-sm">
           <option value="all">All</option>
@@ -35,7 +36,11 @@ const filtered = computed(() => (products.value || []).filter((p:any) => {
       </div>
     </div>
 
-    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div v-if="pending" class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Skeleton v-for="i in 6" :key="i" class="h-64"/>
+    </div>
+
+    <div v-else class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <ProductCard v-for="p in filtered" :key="p.id" :p="p" :price="priceLabel(p.priceUSD)" />
     </div>
   </section>
