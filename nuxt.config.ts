@@ -20,23 +20,35 @@ export default defineNuxtConfig({
 
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@pinia/nuxt'],
   css: ['@/assets/css/tailwind.css'],
+  
+app: {
+  head: {
+    title: 'Piter Ritiauw Exports – International Export Company',
+    meta: [
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'description', content: 'Professional international export website with product catalog, RFQ and compliance.' },
+      { name: 'theme-color', content: '#166534' },
 
-  app: {
-    head: {
-      title: 'Piter Ritiauw Exports – International Export Company',
-      meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Professional international export website with product catalog, RFQ and compliance.' },
-        { name: 'theme-color', content: '#0ea5e9' }
-      ],
-      link: [
-        { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap' }
-      ]
-    }
-  },
+      // Open Graph
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: 'Piter Ritiauw Exports' },
+      { property: 'og:description', content: 'Exporting Indonesia’s best agricultural & UMKM products.' },
+      { property: 'og:image', content: '/og-cover.jpg' },
+      { property: 'og:url', content: 'https://example.com' },
+
+      // Twitter
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Piter Ritiauw Exports' },
+      { name: 'twitter:description', content: 'Exporting Indonesia’s best agricultural & UMKM products.' },
+      { name: 'twitter:image', content: '/og-cover.jpg' }
+    ],
+    link: [
+      { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+      { rel: 'canonical', href: 'https://example.com' }
+    ]
+  }
+}
+
 
   runtimeConfig: {
     public: {
