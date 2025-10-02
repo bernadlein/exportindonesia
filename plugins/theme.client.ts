@@ -1,7 +1,6 @@
 // plugins/theme.client.ts
 export default defineNuxtPlugin(() => {
-  if (process.client) {
-    const saved = localStorage.getItem('theme')
-    if (saved === 'dark') document.documentElement.classList.add('dark')
+  if (process.client && localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark')
   }
 })
