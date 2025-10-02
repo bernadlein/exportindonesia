@@ -4,7 +4,7 @@ export type Currency = 'IDR' | 'USD'
 // Global reactive state
 export const useCurrency = () => useState<Currency>('currency', () => 'IDR')
 
-// Sederhana: data harga disimpan dalam USD → konversi ke IDR
+// Harga di data disimpan USD → konversi ke IDR dengan fallback rate sederhana
 const USD_IDR_FALLBACK = 15500
 
 export function formatMoney(value: number, currency: Currency) {
