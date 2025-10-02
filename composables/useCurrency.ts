@@ -1,8 +1,25 @@
+// composables/useCurrency.ts
+export type Currency = 'IDR' | 'USD'
 
-export const useCurrency = () => useState<'IDR'|'USD'>('currency', () => useRuntimeConfig().public.defaultCurrency as 'IDR'|'USD')
-export const useUSDToIDR = () => 16000 // demo
-export const formatMoney = (value: number, currency: 'IDR'|'USD') => {
-  if (currency === 'USD') return `$${value.toLocaleString('en-US', { maximumFractionDigits: 0 })}`
-  const rate = useUSDToIDR()
-  return `Rp${Math.round(value * rate).toLocaleString('id-ID', { maximumFractionDigits: 0 })}`
+// Global reactive state
+export const useCurrency = () => useState<Currency>('currency', () => 'IDR')
+
+// Sederhana: data harga disimpan dalam USD → konversi ke IDR
+const USD_IDR_FALLBACK = 15500
+
+export function formatMoney(value: number, currency: Currency) {
+  const n = Number(value || 0)
+  if (currency === 'USD') {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: 'USD', maximumFractionDigits: 0
+    }).format(n)
+  }
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency', currency: 'IDR', maximumFractionDigits: 0
+  }).format(n * USD_IDR_FALLBACK)
+}
+
+export function priceRangeLabel(range: [number, number], currency: Currency) {
+  const [min, max] = range
+  return `${formatMoney(min, currency)} – ${formatMoney(max, currency)} / MT`
 }
