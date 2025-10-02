@@ -33,19 +33,20 @@ const filtered = computed(() => (products.value || []).filter((p:any) => {
 
 <template>
   <section class="section">
-    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
       <div>
         <h1 class="section-title">Product Catalog</h1>
         <p class="section-sub">Items with HS code, MOQ & price-range.</p>
       </div>
+    
       <div class="flex flex-wrap items-center gap-2">
-        <select v-model="category" class="rounded-xl border border-slate-300 px-3 py-2 text-sm">
-          <option value="all">All</option>
-          <option value="spices">Spices</option>
-          <option value="coffee">Coffee</option>
-          <option value="charcoal">Charcoal</option>
-          <option value="umkm">UMKM</option>
-        </select>
+        <div class="flex flex-wrap gap-2">
+          <button @click="category='all'"       :class="['px-3 py-1.5 rounded-full text-sm', category==='all'?'bg-brand-600 text-white':'bg-white border border-slate-300']">All</button>
+          <button @click="category='spices'"    :class="['px-3 py-1.5 rounded-full text-sm', category==='spices'?'bg-brand-600 text-white':'bg-white border border-slate-300']">Spices</button>
+          <button @click="category='coffee'"    :class="['px-3 py-1.5 rounded-full text-sm', category==='coffee'?'bg-brand-600 text-white':'bg-white border border-slate-300']">Coffee</button>
+          <button @click="category='charcoal'"  :class="['px-3 py-1.5 rounded-full text-sm', category==='charcoal'?'bg-brand-600 text-white':'bg-white border border-slate-300']">Charcoal</button>
+          <button @click="category='umkm'"      :class="['px-3 py-1.5 rounded-full text-sm', category==='umkm'?'bg-brand-600 text-white':'bg-white border border-slate-300']">UMKM</button>
+        </div>
         <input v-model="query" type="text" placeholder="HS code / keyword" class="rounded-xl border border-slate-300 px-3 py-2 text-sm"/>
       </div>
     </div>
