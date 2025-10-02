@@ -1,16 +1,33 @@
-export default defineNuxtPlugin(() => {
-  const currency = useState<'IDR'|'USD'>('currency')
-  const { locale, setLocale } = useI18n()
+// plugins/persist.client.ts
+// Persist currency & locale TANPA memanggil useI18n() di top-level
 
-  // restore
+import { setLocale } from '#i18n'   // helper resmi dari @nuxtjs/i18n
+
+export default defineNuxtPlugin((nuxtApp) => {
+  // --- Currency ---
+  const currency = useState<'IDR'|'USD'>(
+    'currency',
+    () => useRuntimeConfig().public.defaultCurrency as 'IDR'|'USD'
+  )
+
   if (process.client) {
-    const c = localStorage.getItem('currency')
-    const l = localStorage.getItem('locale')
-    if (c === 'IDR' || c === 'USD') currency.value = c
-    if (l === 'id' || l === 'en') setLocale(l)
+    const savedC = localStorage.getItem('currency')
+    if (savedC === 'IDR' || savedC === 'USD') currency.value = savedC as any
+    watch(currency, v => localStorage.setItem('currency', v))
   }
 
-  // persist
-  watch(currency, v => process.client && localStorage.setItem('currency', v))
-  watch(() => locale.value, v => process.client && localStorage.setItem('locale', v as string))
+  // --- Locale ---
+  if (process.client) {
+    // set dari localStorage saat app mount (composer sudah siap)
+    nuxtApp.hook('app:mounted', () => {
+      const savedL = localStorage.getItem('locale')
+      if (savedL === 'id' || savedL === 'en') setLocale(savedL)
+
+      // pantau perubahan locale dari composer global
+      const composer = nuxtApp.$i18n // vue-i18n Composer
+      watch(composer.locale, (v) => {
+        localStorage.setItem('locale', String(v))
+      })
+    })
+  }
 })
