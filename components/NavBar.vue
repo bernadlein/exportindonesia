@@ -102,6 +102,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
           <button class="px-2 py-1 text-xs rounded-lg" :class="{'bg-slate-900 text-white': locale==='id'}" @click="setLocale('id')">ID</button>
           <button class="px-2 py-1 text-xs rounded-lg" :class="{'bg-slate-900 text-white': locale==='en'}" @click="setLocale('en')">EN</button>
         </div>
+        <ThemeToggle class="hidden md:block" />
         <NuxtLink to="/contact" class="ml-1 btn-primary text-sm">{{ t('cta.request') }}</NuxtLink>
       </div>
     </div>
