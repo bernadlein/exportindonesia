@@ -1,9 +1,33 @@
-
+// nuxt.config.ts
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
+  // Matikan DevTools agar tidak ada warning "Slow module @nuxt/devtools"
+  devtools: { enabled: false },
+
+  // Hilangkan warning compatibilityDate (khusus Nitro/CF Workers)
+  nitro: { compatibilityDate: '2025-10-02' }, // pakai tanggal hari ini
+
+  // Pindahkan konfigurasi PostCSS ke sini (ganti file postcss.config.js)
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {}
+    }
+  },
+
+  // Redam warning "Failed to resolve dependency: vue / vue-router"
+  // (beberapa plugin mencoba meng-include ini di optimizeDeps)
+  vite: {
+    optimizeDeps: {
+      exclude: ['vue', 'vue-router'],
+      include: [] // kosongkan include explicit
+    }
+  },
+
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@pinia/nuxt'],
   css: ['@/assets/css/tailwind.css'],
+
   app: {
     head: {
       title: 'Piter Ritiauw Exports – International Export Company',
@@ -20,6 +44,7 @@ export default defineNuxtConfig({
       ]
     }
   },
+
   runtimeConfig: {
     public: {
       company: process.env.NUXT_PUBLIC_COMPANY || 'Piter Ritiauw Exports',
@@ -27,6 +52,7 @@ export default defineNuxtConfig({
       defaultCurrency: process.env.NUXT_PUBLIC_DEFAULT_CURRENCY || 'IDR'
     }
   },
+
   i18n: {
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
@@ -37,5 +63,6 @@ export default defineNuxtConfig({
     lazy: true,
     langDir: 'locales'
   },
-  tailwindcss: { viewer: false },
+
+  tailwindcss: { viewer: false }
 })
