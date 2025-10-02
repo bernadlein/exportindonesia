@@ -1,1 +1,10 @@
-<template><div><NavBar/><main><slot/></main><SiteFooter/></div></template>
+<template>
+  <div>
+    <NavBar />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+    <StickyCTA />
+  </div>
+</template>
