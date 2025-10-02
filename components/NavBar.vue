@@ -6,7 +6,7 @@ const currentLocale = computed(() => String(locale.value))
 const currency = useCurrency()
 const config = useRuntimeConfig()
 
-// Mega menu (hover + klik untuk lock)
+// Mega menu (hover + click lock)
 const openMega = ref(false)
 const wrap = ref<HTMLElement | null>(null)
 const onDocClick = (e: MouseEvent) => {
@@ -16,7 +16,7 @@ const onDocClick = (e: MouseEvent) => {
 onMounted(() => document.addEventListener('click', onDocClick))
 onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
 
-// helpers persist saat klik
+// helpers: update + persist
 const setCur = (v: 'IDR'|'USD') => { currency.value = v; localStorage.setItem('currency', v) }
 const setLoc = async (v: 'id'|'en') => { await setLocale(v); localStorage.setItem('locale', v) }
 </script>
