@@ -2,13 +2,13 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  // Matikan DevTools agar tidak ada warning "Slow module @nuxt/devtools"
+  // Matikan devtools biar konsol bersih
   devtools: { enabled: false },
 
-  // Hilangkan warning compatibilityDate (khusus Nitro/CF Workers)
-  nitro: { compatibilityDate: '2025-10-02' }, // pakai tanggal hari ini
+  // Hilangkan warning compatibilityDate dari Nitro
+  nitro: { compatibilityDate: '2025-10-02' },
 
-  // Pindahkan konfigurasi PostCSS ke sini (ganti file postcss.config.js)
+  // Pindahkan PostCSS ke sini (hapus file postcss.config.js kalau masih ada)
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -16,14 +16,7 @@ export default defineNuxtConfig({
     }
   },
 
-  // Redam warning "Failed to resolve dependency: vue / vue-router"
-  // (beberapa plugin mencoba meng-include ini di optimizeDeps)
-  vite: {
-    optimizeDeps: {
-      exclude: ['vue', 'vue-router'],
-      include: [] // kosongkan include explicit
-    }
-  },
+  // ⛔️ JANGAN override vite.optimizeDeps (hapus konfigurasi sebelumnya)
 
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@pinia/nuxt'],
   css: ['@/assets/css/tailwind.css'],
