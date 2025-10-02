@@ -1,9 +1,7 @@
 {
   "nav": {
-    "home": "Home",
-    "catalog": "Catalog",
-    "certificates": "Certificates",
     "projects": "Projects",
+    "certificates": "Certificates",
     "about": "About",
     "contact": "Contact"
   },
@@ -12,51 +10,32 @@
     "browse": "Browse Catalog"
   },
   "hero": {
-    "badge": "Trusted Indonesian Export Partner",
-    "title1": "Exporting Indonesia's Best",
-    "title2": "Agricultural & UMKM",
-    "title3": "Products",
-    "sub": "Company profile with strong credibility, structured product catalog, and RFQ capturing complete details so every inquiry is trackable."
+    "badge": "Export-ready products",
+    "title1": "We export",
+    "title2": "Indonesia’s best",
+    "title3": "to the world",
+    "sub": "Compliance, quality, and on-time shipments."
   },
   "why": {
-    "title": "Why choose Piter Ritiauw Exports",
-    "c1": "Compliance & Documentation",
-    "c1d": "NIB, HS Codes, certificates (Halal/COA), clear Incoterms & Payment Terms.",
-    "c2": "RFQ that Converts",
-    "c2d": "Step-by-step wizard capturing qty, port, packing and more.",
-    "c3": "International Ready",
-    "c3d": "Language switcher (ID/EN) & currency (IDR/USD).",
-    "c4": "Leads Tracked",
-    "c4d": "RFQs saved and exportable."
-  },
-  "catalog": {
-    "title": "Product Catalog",
-    "sub": "Items with HS code, MOQ & indicative price-range.",
-    "hs": "HS",
-    "moq": "MOQ",
-    "price": "Price range",
-    "rfq": "Get Latest Price",
-    "details": "Details"
-  },
-  "cert": {
-    "title": "Certificates & Compliance",
-    "sub": "Show legal & quality docs to build buyer trust."
-  },
-  "proj": {
-    "title": "Recent Shipments & Projects",
-    "sub": "Selected shipments that prove capability and consistency."
-  },
-  "about": {
-    "title": "About Us",
-    "sub": "Professional export company serving global buyers."
-  },
-  "contact": {
-    "title": "Contact",
-    "email": "Email",
-    "phone": "Phone/WhatsApp",
-    "office": "Office",
-    "cta": "Ready to talk?",
-    "ctad": "Share product & destination. We'll reply within 24 hours.",
-    "btn": "Start RFQ"
+    "title": "Why choose us",
+    "sub": "Compliance, speed, and clear communication.",
+    "cards": {
+      "compliance": {
+        "title": "Compliance & Docs",
+        "desc": "NIB, HS, Halal/COA, Phytosanitary."
+      },
+      "rfq": {
+        "title": "RFQ that Converts",
+        "desc": "Step-by-step wizard + 24h SLA."
+      },
+      "intl": {
+        "title": "International Ready",
+        "desc": "ID/EN & currency IDR/USD."
+      },
+      "leads": {
+        "title": "Leads Tracked",
+        "desc": "Every RFQ recorded & exportable."
+      }
+    }
   }
 }
