@@ -3,21 +3,22 @@ import { setLocale } from '#i18n'
 
 const { t, locale } = useI18n()
 const currentLocale = computed(() => String(locale.value))
-
+const currency = useCurrency()
 const config = useRuntimeConfig()
 
-// Currency global (ref)
-const currency = useCurrency()
-
-// Mega menu (CSS hover + click lock)
+// Mega menu (hover + klik untuk lock)
 const openMega = ref(false)
-const wrapper = ref<HTMLElement | null>(null)
+const wrap = ref<HTMLElement | null>(null)
 const onDocClick = (e: MouseEvent) => {
-  if (!wrapper.value) return
-  if (!wrapper.value.contains(e.target as Node)) openMega.value = false
+  if (!wrap.value) return
+  if (!wrap.value.contains(e.target as Node)) openMega.value = false
 }
 onMounted(() => document.addEventListener('click', onDocClick))
 onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
+
+// helpers persist saat klik
+const setCur = (v: 'IDR'|'USD') => { currency.value = v; localStorage.setItem('currency', v) }
+const setLoc = async (v: 'id'|'en') => { await setLocale(v); localStorage.setItem('locale', v) }
 </script>
 
 <template>
@@ -32,47 +33,26 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
         </div>
       </NuxtLink>
 
-      <!-- Desktop nav -->
+      <!-- Nav -->
       <nav class="hidden lg:flex items-center gap-6 text-sm">
-        <!-- Products with hover panel -->
-        <div ref="wrapper" class="relative group">
-          <button
-            type="button"
-            class="inline-flex items-center gap-2 hover:text-brand-600 focus:outline-none"
-            :aria-expanded="openMega"
-            @click.stop="openMega = !openMega"
-          >
+        <div ref="wrap" class="relative group">
+          <button type="button" class="inline-flex items-center gap-2 hover:text-brand-600"
+                  :aria-expanded="openMega" @click.stop="openMega = !openMega">
             Products
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
-
-          <!-- hover bridge -->
           <div class="absolute left-0 top-full h-3 w-[680px] z-[55] pointer-events-none group-hover:pointer-events-auto" />
-
-          <!-- panel -->
-          <div
-            class="absolute left-0 top-full w-[680px] rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl z-[60]
-                   dark:border-slate-700 dark:bg-slate-800
-                   invisible opacity-0 translate-y-2 pointer-events-none transition duration-200
-                   group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto"
-            :class="openMega ? 'visible opacity-100 translate-y-0 pointer-events-auto' : ''"
-          >
+          <div class="absolute left-0 top-full w-[680px] rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl z-[60]
+                      dark:border-slate-700 dark:bg-slate-800 invisible opacity-0 translate-y-2 pointer-events-none transition
+                      group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto"
+               :class="openMega ? 'visible opacity-100 translate-y-0 pointer-events-auto' : ''">
             <div class="grid grid-cols-2 gap-4">
-              <NuxtLink to="/catalog?category=spices"   class="card p-4 hover:shadow cursor-pointer">
-                <h4 class="font-semibold">Spices</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse spices</p>
-              </NuxtLink>
-              <NuxtLink to="/catalog?category=coffee"   class="card p-4 hover:shadow cursor-pointer">
-                <h4 class="font-semibold">Coffee</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse coffee</p>
-              </NuxtLink>
-              <NuxtLink to="/catalog?category=charcoal" class="card p-4 hover:shadow cursor-pointer">
-                <h4 class="font-semibold">Charcoal</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse charcoal</p>
-              </NuxtLink>
-              <NuxtLink to="/catalog?category=umkm"     class="card p-4 hover:shadow cursor-pointer">
-                <h4 class="font-semibold">UMKM</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse UMKM</p>
-              </NuxtLink>
+              <NuxtLink to="/catalog?category=spices"   class="card p-4 hover:shadow"><h4 class="font-semibold">Spices</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse spices</p></NuxtLink>
+              <NuxtLink to="/catalog?category=coffee"   class="card p-4 hover:shadow"><h4 class="font-semibold">Coffee</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse coffee</p></NuxtLink>
+              <NuxtLink to="/catalog?category=charcoal" class="card p-4 hover:shadow"><h4 class="font-semibold">Charcoal</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse charcoal</p></NuxtLink>
+              <NuxtLink to="/catalog?category=umkm"     class="card p-4 hover:shadow"><h4 class="font-semibold">UMKM</h4><p class="text-xs text-slate-600 dark:text-slate-300">Browse UMKM</p></NuxtLink>
             </div>
             <div class="mt-4 flex items-center justify-between">
               <NuxtLink to="/catalog" class="btn-outline text-sm">View All Products</NuxtLink>
@@ -88,29 +68,29 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
         <NuxtLink to="/contact" class="hover:text-brand-600">{{ t('nav.contact') }}</NuxtLink>
       </nav>
 
-      <!-- Controls (kanan) -->
+      <!-- Controls -->
       <div class="flex items-center gap-2">
         <!-- Currency -->
         <div class="hidden md:flex items-center gap-1 rounded-xl border border-slate-200 p-1 dark:border-slate-700">
           <button class="px-2 py-1 text-xs rounded-lg"
                   :class="{'bg-slate-900 text-white': currency==='IDR'}"
-                  @click="currency='IDR'">IDR</button>
+                  @click="setCur('IDR')">IDR</button>
           <button class="px-2 py-1 text-xs rounded-lg"
                   :class="{'bg-slate-900 text-white': currency==='USD'}"
-                  @click="currency='USD'">USD</button>
+                  @click="setCur('USD')">USD</button>
         </div>
 
         <!-- Locale -->
         <div class="flex items-center gap-1 rounded-xl border border-slate-200 p-1 dark:border-slate-700">
           <button class="px-2 py-1 text-xs rounded-lg"
                   :class="{'bg-slate-900 text-white': currentLocale==='id'}"
-                  @click="setLocale('id')">ID</button>
+                  @click="setLoc('id')">ID</button>
           <button class="px-2 py-1 text-xs rounded-lg"
                   :class="{'bg-slate-900 text-white': currentLocale==='en'}"
-                  @click="setLocale('en')">EN</button>
+                  @click="setLoc('en')">EN</button>
         </div>
 
-        <!-- Theme toggle -->
+        <!-- Theme -->
         <ThemeToggle class="hidden md:block" />
 
         <!-- CTA -->
