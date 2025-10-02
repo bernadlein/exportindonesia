@@ -3,29 +3,8 @@ const { t, locale, setLocale } = useI18n()
 const config = useRuntimeConfig()
 const currency = useCurrency()
 
-// state untuk mega menu (dipakai hover di desktop & click di mobile)
-const openMega = ref(false)
-let closeTimer: ReturnType<typeof setTimeout> | null = null
-
-const openNow = () => {
-  if (closeTimer) clearTimeout(closeTimer)
-  openMega.value = true
-}
-const scheduleClose = () => {
-  if (closeTimer) clearTimeout(closeTimer)
-  closeTimer = setTimeout(() => (openMega.value = false), 150)
-}
-const toggleClick = () => (openMega.value = !openMega.value)
-const onEscape = (e: KeyboardEvent) => e.key === 'Escape' && (openMega.value = false)
-onMounted(() => document.addEventListener('keydown', onEscape))
-onBeforeUnmount(() => document.removeEventListener('keydown', onEscape))
-
-const productCats = [
-  { name: 'Spices', to: '/catalog?category=spices' },
-  { name: 'Coffee', to: '/catalog?category=coffee' },
-  { name: 'Charcoal', to: '/catalog?category=charcoal' },
-  { name: 'UMKM', to: '/catalog?category=umkm' }
-]
+// Mobile dropdown
+const mobileOpen = ref(false)
 </script>
 
 <template>
@@ -40,31 +19,44 @@ const productCats = [
         </div>
       </NuxtLink>
 
-      <!-- Desktop nav -->
+      <!-- Desktop nav (CSS-only hover) -->
       <nav class="hidden lg:flex items-center gap-6 text-sm">
-        <!-- WRAPPER menampung trigger + panel -->
-        <div class="relative"
-             @mouseenter="openNow" @mouseleave="scheduleClose">
+        <!-- Wrapper: trigger + panel dalam 1 group -->
+        <div class="relative group">
           <!-- Trigger -->
-          <button class="inline-flex items-center gap-2 hover:text-brand-600"
-                  type="button" @click="toggleClick">
+          <button type="button" aria-haspopup="true" aria-expanded="false"
+                  class="inline-flex items-center gap-2 hover:text-brand-600 focus:outline-none">
             Products
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform"
-                 :class="openMega ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
 
-          <!-- Panel -->
-          <div v-show="openMega"
-               class="absolute left-0 top-full translate-y-2 w-[680px] rounded-2xl
-                      border border-slate-200 bg-white p-6 shadow-2xl z-[60]">
+          <!-- Panel (keluar saat group-hover) -->
+          <div
+            class="absolute left-0 top-full mt-2 w-[680px] rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl z-[60]
+                   invisible opacity-0 translate-y-2 pointer-events-none
+                   group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
+                   transition duration-200"
+          >
             <div class="grid grid-cols-2 gap-4">
-              <NuxtLink v-for="c in productCats" :key="c.to" :to="c.to"
-                        class="card p-4 hover:shadow cursor-pointer">
-                <h4 class="font-semibold">{{ c.name }}</h4>
-                <p class="text-xs text-slate-600">Browse {{ c.name.toLowerCase() }}</p>
+              <NuxtLink to="/catalog?category=spices"   class="card p-4 hover:shadow cursor-pointer">
+                <h4 class="font-semibold">Spices</h4>
+                <p class="text-xs text-slate-600">Browse spices</p>
+              </NuxtLink>
+              <NuxtLink to="/catalog?category=coffee"   class="card p-4 hover:shadow cursor-pointer">
+                <h4 class="font-semibold">Coffee</h4>
+                <p class="text-xs text-slate-600">Browse coffee</p>
+              </NuxtLink>
+              <NuxtLink to="/catalog?category=charcoal" class="card p-4 hover:shadow cursor-pointer">
+                <h4 class="font-semibold">Charcoal</h4>
+                <p class="text-xs text-slate-600">Browse charcoal</p>
+              </NuxtLink>
+              <NuxtLink to="/catalog?category=umkm"     class="card p-4 hover:shadow cursor-pointer">
+                <h4 class="font-semibold">UMKM</h4>
+                <p class="text-xs text-slate-600">Browse UMKM</p>
               </NuxtLink>
             </div>
             <div class="mt-4 flex items-center justify-between">
@@ -99,7 +91,36 @@ const productCats = [
                   :class="{'bg-slate-900 text-white': locale==='en'}"
                   @click="setLocale('en')">EN</button>
         </div>
+
+        <!-- Mobile trigger -->
+        <button class="lg:hidden btn-outline text-xs" @click="mobileOpen = !mobileOpen">
+          Menu
+        </button>
+
         <NuxtLink to="/contact" class="ml-1 btn-primary text-sm">{{ t('cta.request') }}</NuxtLink>
+      </div>
+    </div>
+
+    <!-- Mobile dropdown -->
+    <div v-if="mobileOpen" class="lg:hidden border-t border-slate-200 bg-white">
+      <div class="container py-3 space-y-2 text-sm">
+        <details class="group">
+          <summary class="cursor-pointer py-2 font-semibold flex items-center justify-between">
+            Products
+            <span class="ml-2 text-slate-500 group-open:rotate-180 transition">⌄</span>
+          </summary>
+          <div class="pl-3 grid grid-cols-2 gap-3 pt-2">
+            <NuxtLink to="/catalog?category=spices"   @click="mobileOpen=false" class="btn-outline text-xs">Spices</NuxtLink>
+            <NuxtLink to="/catalog?category=coffee"   @click="mobileOpen=false" class="btn-outline text-xs">Coffee</NuxtLink>
+            <NuxtLink to="/catalog?category=charcoal" @click="mobileOpen=false" class="btn-outline text-xs">Charcoal</NuxtLink>
+            <NuxtLink to="/catalog?category=umkm"     @click="mobileOpen=false" class="btn-outline text-xs">UMKM</NuxtLink>
+          </div>
+        </details>
+        <NuxtLink to="/services"     @click="mobileOpen=false" class="block py-2">Services</NuxtLink>
+        <NuxtLink to="/projects"     @click="mobileOpen=false" class="block py-2">{{ t('nav.projects') }}</NuxtLink>
+        <NuxtLink to="/certificates" @click="mobileOpen=false" class="block py-2">{{ t('nav.certificates') }}</NuxtLink>
+        <NuxtLink to="/about"        @click="mobileOpen=false" class="block py-2">{{ t('nav.about') }}</NuxtLink>
+        <NuxtLink to="/contact"      @click="mobileOpen=false" class="block py-2">{{ t('nav.contact') }}</NuxtLink>
       </div>
     </div>
   </header>
