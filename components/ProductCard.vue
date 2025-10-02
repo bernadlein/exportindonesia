@@ -48,7 +48,7 @@ const props = defineProps<{ p: any; price: string }>()
       </p>
 
       <div class="mt-4 flex items-center gap-2">
-        <ui-button to="/contact">Get Latest Price</ui-button>
+        <ui-button @click="openRfq({ product: p.name, hs: p.hs })">Get Latest Price</ui-button>
         <ui-button :to="`/products/${p.id}`" variant="outline">Details</ui-button>
       </div>
     </div>
