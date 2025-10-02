@@ -1,9 +1,7 @@
 {
   "nav": {
-    "home": "Beranda",
-    "catalog": "Katalog",
-    "certificates": "Sertifikat",
     "projects": "Proyek",
+    "certificates": "Sertifikat",
     "about": "Tentang",
     "contact": "Kontak"
   },
@@ -12,51 +10,32 @@
     "browse": "Lihat Katalog"
   },
   "hero": {
-    "badge": "Mitra Ekspor Indonesia Terpercaya",
-    "title1": "Mengekspor Produk",
-    "title2": "Pertanian & UMKM",
-    "title3": "Terbaik Indonesia",
-    "sub": "Profil perusahaan yang kuat, katalog rapi, dan RFQ dengan detail lengkap agar setiap inquiry tercatat."
+    "badge": "Produk siap ekspor",
+    "title1": "Kami mengekspor",
+    "title2": "produk terbaik Indonesia",
+    "title3": "ke seluruh dunia",
+    "sub": "Kepatuhan dokumen, kualitas, dan pengiriman tepat waktu."
   },
   "why": {
-    "title": "Kenapa memilih Piter Ritiauw Exports",
-    "c1": "Kepatuhan & Dokumen",
-    "c1d": "NIB, HS code, sertifikat (Halal/COA), incoterms & payment terms jelas.",
-    "c2": "RFQ yang Mengkonversi",
-    "c2d": "Wizard bertahap menangkap qty, pelabuhan, packing, dll.",
-    "c3": "Siap Internasional",
-    "c3d": "Switch Bahasa ID/EN & mata uang IDR/USD.",
-    "c4": "Lead Terekam",
-    "c4d": "RFQ tersimpan & bisa diekspor."
-  },
-  "catalog": {
-    "title": "Katalog Produk",
-    "sub": "Produk dengan HS code, MOQ dan kisaran harga.",
-    "hs": "HS",
-    "moq": "MOQ",
-    "price": "Rentang harga",
-    "rfq": "Minta Harga",
-    "details": "Detail"
-  },
-  "cert": {
-    "title": "Sertifikat & Kepatuhan",
-    "sub": "Tampilkan dokumen legal & kualitas untuk membangun kepercayaan."
-  },
-  "proj": {
-    "title": "Pengiriman & Proyek Terbaru",
-    "sub": "Kumpulan pengiriman terpilih yang membuktikan kapabilitas."
-  },
-  "about": {
-    "title": "Tentang Kami",
-    "sub": "Perusahaan ekspor profesional melayani buyer global."
-  },
-  "contact": {
-    "title": "Kontak",
-    "email": "Email",
-    "phone": "Telepon/WhatsApp",
-    "office": "Kantor",
-    "cta": "Siap berdiskusi?",
-    "ctad": "Kirim produk & tujuan. Kami balas 24 jam.",
-    "btn": "Mulai RFQ"
+    "title": "Kenapa pilih kami",
+    "sub": "Dokumen rapi, cepat, dan komunikasi jelas.",
+    "cards": {
+      "compliance": {
+        "title": "Dokumen & Compliance",
+        "desc": "NIB, HS, Halal/COA, Phytosanitary."
+      },
+      "rfq": {
+        "title": "RFQ yang Konversi",
+        "desc": "Wizard bertahap + SLA 24 jam."
+      },
+      "intl": {
+        "title": "Siap Internasional",
+        "desc": "Bahasa ID/EN & mata uang IDR/USD."
+      },
+      "leads": {
+        "title": "Leads Terekam",
+        "desc": "Semua RFQ tercatat & bisa diekspor."
+      }
+    }
   }
 }
