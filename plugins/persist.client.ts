@@ -3,7 +3,6 @@ import { setLocale } from '#i18n'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const currency = useCurrency()
-
   if (!process.client) return
 
   // currency
