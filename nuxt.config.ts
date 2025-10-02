@@ -56,16 +56,18 @@ export default defineNuxtConfig({
     }
   },
 
-  i18n: {
-    strategy: 'prefix_except_default',
-    defaultLocale: 'en',
-    locales: [
-      { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'id', name: 'Bahasa Indonesia', file: 'id.json' }
-    ],
-    lazy: true,
-    langDir: 'locales'
-  },
+  // nuxt.config.ts (bagian i18n)
+i18n: {
+  strategy: 'prefix_except_default',
+  defaultLocale: 'en',
+  locales: [
+    { code: 'en', name: 'English', file: 'en.json' },
+    { code: 'id', name: 'Bahasa Indonesia', file: 'id.json' }
+  ],
+  lazy: true,
+  langDir: 'locales',
+  detectBrowserLanguage: false
+},
 
   tailwindcss: { viewer: false }
 })
