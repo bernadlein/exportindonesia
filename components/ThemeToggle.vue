@@ -7,6 +7,7 @@ onMounted(() => {
   if (saved === 'dark') el.classList.add('dark')
   isDark.value = el.classList.contains('dark')
 })
+
 const toggle = () => {
   const el = document.documentElement
   el.classList.toggle('dark')
