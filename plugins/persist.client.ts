@@ -1,13 +1,14 @@
+// plugins/persist.client.ts
 import { setLocale } from '#i18n'
 
 export default defineNuxtPlugin(() => {
   if (!process.client) return
 
-  // currency
-  const c = localStorage.getItem('currency')
-  if (c === 'IDR' || c === 'USD') useCurrency().value = c as any
+  // restore currency
+  const savedC = localStorage.getItem('currency')
+  if (savedC === 'IDR' || savedC === 'USD') useCurrency().value = savedC as any
 
-  // locale
-  const saved = localStorage.getItem('locale')
-  if (saved === 'id' || saved === 'en') setLocale(saved)
+  // restore locale
+  const savedL = localStorage.getItem('locale')
+  if (savedL === 'id' || savedL === 'en') setLocale(savedL)
 })
