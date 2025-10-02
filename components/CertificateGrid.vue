@@ -5,7 +5,11 @@ const { data: items } = await useFetch('/api/certificates')
 <template>
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
     <div v-for="c in items" :key="c.id" class="card overflow-hidden">
-      <img :src="c.img" :alt="c.title" class="h-28 w-full object-cover">
+      <img 
+        :src="c.img" 
+        :alt="c.title" 
+        loading="lazy"
+        class="h-28 w-full object-cover">
       <div class="p-3 text-center">
         <p class="text-sm font-semibold">{{ c.title }}</p>
       </div>
