@@ -1,13 +1,13 @@
-<!-- components/NavBar.vue -->
 <script setup lang="ts">
 const { t, locale, setLocale } = useI18n()
 const config = useRuntimeConfig()
 const currency = useCurrency()
 
-// Biar bisa dibuka pakai klik juga (selain hover)
+// buka/tutup via klik (lock open)
 const openMega = ref(false)
 const wrapper = ref<HTMLElement | null>(null)
 
+// klik di luar -> tutup
 const onDocClick = (e: MouseEvent) => {
   if (!wrapper.value) return
   if (!wrapper.value.contains(e.target as Node)) openMega.value = false
@@ -30,12 +30,13 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
 
       <!-- Desktop nav -->
       <nav class="hidden lg:flex items-center gap-6 text-sm">
-        <!-- WRAPPER (group) berisi trigger + BRIDGE + panel -->
+        <!-- GROUP wrapper: trigger + bridge + panel -->
         <div ref="wrapper" class="relative group">
           <!-- Trigger -->
           <button
             type="button"
             class="inline-flex items-center gap-2 hover:text-brand-600 focus:outline-none"
+            :aria-expanded="openMega"
             @click.stop="openMega = !openMega"
           >
             Products
@@ -45,19 +46,17 @@ onBeforeUnmount(() => document.removeEventListener('click', onDocClick))
             </svg>
           </button>
 
-          <!-- HOVER BRIDGE: area transparan 10–12px yang menjembatani cursor -->
+          <!-- HOVER BRIDGE: hanya aktif saat SUDAH hover trigger -->
           <div
-            class="absolute left-0 top-full h-3 w-[680px] z-[55]"
-            @mouseenter="openMega = true"
+            class="absolute left-0 top-full h-3 w-[680px] z-[55]
+                   pointer-events-none group-hover:pointer-events-auto"
           />
 
           <!-- Panel -->
           <div
             class="absolute left-0 top-full w-[680px] rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl z-[60]
                    transition duration-200
-                   /* default tertutup */
                    invisible opacity-0 translate-y-2 pointer-events-none
-                   /* buka saat hover group */
                    group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto"
             :class="openMega ? 'visible opacity-100 translate-y-0 pointer-events-auto' : ''"
           >
