@@ -1,8 +1,21 @@
 <script setup lang="ts">
 const currency = useCurrency()
+const route = useRoute()
 const { data: products, pending } = await useFetch('/api/products')
+
 const query = ref('')
 const category = ref('all')
+
+// baca query pertama kali
+onMounted(() => {
+  const c = String(route.query.category || '')
+  if (['spices','coffee','charcoal','umkm'].includes(c)) category.value = c
+})
+// kalau query berubah, update juga
+watch(() => route.query.category, (v) => {
+  const c = String(v || '')
+  if (['spices','coffee','charcoal','umkm'].includes(c)) category.value = c
+})
 
 const priceLabel = (range:[number,number]) => {
   const [min,max] = range
@@ -16,6 +29,7 @@ const filtered = computed(() => (products.value || []).filter((p:any) => {
   return okCat && okQ
 }))
 </script>
+
 
 <template>
   <section class="section">
